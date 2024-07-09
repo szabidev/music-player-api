@@ -33,23 +33,6 @@ app.get("/bands", async (req, res) => {
   }
 });
 
-// Fetch a single band by ID
-app.get("/bands/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const band = await Band.findById(id);
-    if (!band) {
-      res.status(404).json({ error: "Band not found" });
-    }
-    res.status(200).json(band);
-  } catch (error) {
-    console.error("Error fetching band:", error);
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: error.toString() });
-  }
-});
-
 // Create a new band
 app.post("/bands", async (req, res) => {
   try {
