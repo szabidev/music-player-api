@@ -29,7 +29,7 @@ This project is a simple music band database application built with Node.js, Exp
    `npm install`
 
 3. Start MongoDB server on your local machine
-   `sudo systemctl start mongod` for linux
+   `sudo systemctl start mongod` for linux,
    `C:\mongodb\bin\mongod.exe --dbpath "pathToMongoDB\db\data"` for windows (replace with the correct path for MongoDB's data directory path)
 
 4. Start server
@@ -38,21 +38,3 @@ This project is a simple music band database application built with Node.js, Exp
 ### Usage
 
 After starting the server, you can use any HTTP client (like Postman or curl) to interact with the API.
-ex: ```POST /bands
-Content-Type: application/json
-
-{
-"name": "New Band",
-"albums": [
-{
-"title": "New Album",
-"songs": [
-{
-"title": "New Song",
-"length": "4:30"
-}
-],
-"description": "Album description here."
-}
-]
-}```
