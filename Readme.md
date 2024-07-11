@@ -29,8 +29,11 @@ This project is a simple music band database application built with Node.js, Exp
    `npm install`
 
 3. Start MongoDB server on your local machine
-   `sudo systemctl start mongod` for linux,
-   `C:\mongodb\bin\mongod.exe --dbpath "pathToMongoDB\db\data"` for windows (replace with the correct path for MongoDB's data directory path)
+   `sh
+sudo systemctl start mongod` for linux,
+   `sh
+C:\mongodb\bin\mongod.exe --dbpath "pathToMongoDB\db\data"`
+   for windows (replace with the correct path for MongoDB's data directory path)
 
 4. Start server
    `npm start`
