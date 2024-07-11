@@ -76,34 +76,34 @@ app.delete("/bands/:id", async (req, res) => {
 });
 
 // Search for a band
-app.get("/bands", async (req, res) => {
-  const { query } = req.params;
+// app.get("/bands", async (req, res) => {
+//   const { query } = req.params;
 
-  if (!query) {
-    return res.status(400).json({ error: "Query parameter is required" });
-  }
+//   if (!query) {
+//     return res.status(400).json({ error: "Query parameter is required" });
+//   }
 
-  try {
-    const band = await Band.find({
-      $or: [
-        { name: { $regex: query, $options: "i" } },
-        { "albums.title": { $regex: query, $options: "i" } },
-        { "albums.songs.title": { $regex: query, $options: "i" } },
-      ],
-    });
+//   try {
+//     const band = await Band.find({
+//       $or: [
+//         { name: { $regex: query, $options: "i" } },
+//         { "albums.title": { $regex: query, $options: "i" } },
+//         { "albums.songs.title": { $regex: query, $options: "i" } },
+//       ],
+//     });
 
-    if (!band.length) {
-      res.status(404).json({ error: "Band not found" });
-    }
-    console.log(band, "band");
-    res.status(200).json(band);
-  } catch (error) {
-    console.error("Error fetching band:", error);
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: error.toString() });
-  }
-});
+//     if (!band.length) {
+//       res.status(404).json({ error: "Band not found" });
+//     }
+//     console.log(band, "band");
+//     res.status(200).json(band);
+//   } catch (error) {
+//     console.error("Error fetching band:", error);
+//     res
+//       .status(500)
+//       .json({ error: "Internal Server Error", details: error.toString() });
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
