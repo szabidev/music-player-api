@@ -9,7 +9,7 @@ app.use(cors());
 
 const port = process.env.PORT || 8000;
 
-mongoose.connect("mongodb://localhost:27017/music");
+mongoose.connect("mongodb://mongo:27017/music");
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

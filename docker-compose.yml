@@ -22,7 +22,7 @@ services:
 
   frontend:
     build:
-      context: ../music-player # Specify the build context to the frontend folder
+      context: ../music-player
     container_name: musicplayerlibrary-frontend
     ports:
       - "3000:3000"
