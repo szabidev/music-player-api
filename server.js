@@ -72,6 +72,41 @@ app.delete("/bands/:id", async (req, res) => {
   }
 });
 
+// Delete one song from a band
+app.delete("/bands/:id/songs/:songId", async (req, res) => {
+  try {
+    const band = await Band.findById(req.params.id);
+    if (!band) {
+      return res.status(404).json({ error: "Band not found" });
+    }
+
+    let songRemoved = false;
+    // Iterate over each album
+    band.albums.forEach((album) => {
+      // Find the song in the album and remove it
+      const songIndex = album.songs.findIndex(
+        (song) => song._id.toString() === req.params.songId
+      );
+      if (songIndex > -1) {
+        album.songs.splice(songIndex, 1);
+        songRemoved = true;
+      }
+    });
+
+    if (!songRemoved) {
+      return res.status(404).json({ error: "Song not found in any album" });
+    }
+
+    const updatedBand = await band.save();
+    res.status(200).json(updatedBand);
+  } catch (error) {
+    console.error("Error deleting song:", error);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.toString() });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
