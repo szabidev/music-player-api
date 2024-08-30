@@ -1,31 +1,31 @@
 version: "3.8"
 
 services:
-  mongo:
-    image: mongo
-    container_name: musicplayerlibrary-mongo
-
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-
   backend:
     build:
       context: .
     container_name: musicplayerlibrary-backend
-
     depends_on:
       - mongo
     ports:
       - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/music
+
+  mongo:
+    image: mongo
+    container_name: musicplayerlibrary-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
 
   frontend:
     build:
       context: ../music-player
     container_name: musicplayerlibrary-frontend
     ports:
-      - "3000:3000"
+      - "3001:80"
     depends_on:
       - backend
 
